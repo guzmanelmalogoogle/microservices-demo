@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: skaffold/v1beta2
+apiVersion: skaffold/v2beta16
 kind: Config
 build:
   artifacts:
@@ -65,3 +65,4 @@ profiles:
       diskSizeGb: 300
       machineType: N1_HIGHCPU_32
       timeout: 4000s
+      kanikoImage: gcr.io/kaniko-project/executor
