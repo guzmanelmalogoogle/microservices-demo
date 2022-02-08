@@ -39,7 +39,7 @@ If you’re using this demo, please **★Star** this repository to show your int
 1. **[Create a Google Cloud Platform project](https://cloud.google.com/resource-manager/docs/creating-managing-projects#creating_a_project)** or use an existing project. Set the `PROJECT_ID` environment variable and ensure the Google Kubernetes Engine and Cloud Operations APIs are enabled.
 
 ```
-PROJECT_ID="<your-project-id>"
+PROJECT_ID=$DEVSHELL_PROJECT_ID
 gcloud services enable container.googleapis.com --project ${PROJECT_ID}
 gcloud services enable monitoring.googleapis.com \
     cloudtrace.googleapis.com \
@@ -62,18 +62,18 @@ overview](https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-ove
 to learn more):
 
 ```
-REGION=us-central1
-gcloud container clusters create-auto onlineboutique \
-    --project=${PROJECT_ID} --region=${REGION}
+REGION=europe-west1
+gcloud container clusters create-auto onlineboutique-stagging \
+    --project=${PROJECT_ID} --region=${REGION} --network onlineboutique-vpc --subnetwork onlineboutique-subnet
 ```
 
 - GKE Standard mode:
 
 ```
-ZONE=us-central1-b
-gcloud container clusters create onlineboutique \
+ZONE=europe-west1-b
+gcloud container clusters create onlineboutique-prod \
     --project=${PROJECT_ID} --zone=${ZONE} \
-    --machine-type=e2-standard-2 --num-nodes=4
+    --machine-type=e2-standard-2 --num-nodes=4 --network onlineboutique-vpc --subnetwork onlineboutique-subnet
 ```
 
 4. **Deploy the sample app to the cluster.**
